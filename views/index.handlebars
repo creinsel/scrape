@@ -9,17 +9,18 @@
     <a class="btn btn-primary btn-lg" href="#!" role="button">Some action</a>
   </p>
 </div>
-
+<div class="row">
 <div class="card">
+    {{#each article}}
   <div class="card-body">
-    <h4 class="card-title bg-primary">News Title--> Links to Article</h4>
+    <h4 class="card-title bg-primary text-left"><a href= "{{link}}">{{title}}</a> </h4>
     <h6 class="card-subtitle mb-2">
-        <button type="button" class="btn btn-danger m-1">Save Article</button>
-        <button type="button" class="btn btn-success m-1">Save Article</button>
+        <button type="button" class="btn btn-primary m-1">Save Article</button>   
         </h6>
     <p class="card-text">
-     Description
+     {{body}}
     </p>
   
   </div>
+</div>
 </div>
