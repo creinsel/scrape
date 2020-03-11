@@ -10,6 +10,10 @@ var ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    body: {
+        type: String,
+        required: true
+    },
     comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
@@ -19,3 +23,6 @@ var ArticleSchema = new Schema({
 var Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;
+
+
+
