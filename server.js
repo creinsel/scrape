@@ -40,10 +40,10 @@ app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(found) {
       console.log("inital page load", found);
-      //res.json(found);
-      // var hbsObj = {
-      //   : found
-      // };
+      // res.json(found);
+      var hbsObj = {
+        article : found
+      };
       console.log("hbsObj", hbsObj);
       res.render("index", hbsObj);
     })
@@ -54,7 +54,7 @@ app.get("/", function(req, res) {
 });
 
 // // A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
+app.get("/scrape-art", function(req, res) {
 //   // First, we grab the body of the html with axios
   axios.get("https://www.theonion.com/").then(async function(response) {
 //     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -71,7 +71,8 @@ app.get("/scrape", function(req, res) {
         .text();
       result.link = $(this)
         .children("a")
-        .attr("href");
+        .attr("href")
+        .text();
       result.body = $(this)
         .children("a")
         .children("p")

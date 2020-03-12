@@ -1,0 +1,19 @@
+body{
+    background-image: url(/images/onion.jpg);
+    background: size 50;
+    background-attachment: fixed;
+
+}
+
+h1{
+    font-family: 'Monoton', cursive;
+}
+
+.onion{
+    color:rgb(85,111,50) !important;
+    
+}
+
+.bkgrd{
+    background-color: rgb(85,111,50);
+}
