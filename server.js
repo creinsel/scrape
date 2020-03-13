@@ -59,9 +59,11 @@ app.get("/scrape-art", function(req, res) {
   axios.get("https://www.theonion.com/").then(async function(response) {
 //     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
+    
 
 //     // Now, we grab every h2 within an article tag, and do the following:
    $(".sc-1pw4fyi-1").each(function (i, element) {
+    
       //       // Save an empty result object
       var result = {};
       //       // Add the text and href of every link, and save them as properties of the result object
@@ -71,26 +73,31 @@ app.get("/scrape-art", function(req, res) {
         .text();
       result.link = $(this)
         .children("a")
-        .attr("href")
-        .text();
+        .attr("href");
       result.body = $(this)
         .children("a")
         .children("p")
         .text();
+        
       //       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function (dbArticle) {
           //           // View the added result in the console
           console.log(dbArticle);
+          
         })
         .catch(function (err) {
           // If an error occurred, log it
           console.log(err);
         });
+      
     });
 
 //     // Send a message to the client
-    res.send("Scrape Complete");
+
+    res.redirect("/");
+
+  
   });
 });
 
