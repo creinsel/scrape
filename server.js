@@ -1,6 +1,7 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrape"
 // var logger = require("morgan");
 
 // Our scraping tools
@@ -29,7 +30,7 @@ app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scrape", { useNewUrlParser: true }, (err) =>{
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err) =>{
   if(!err) console.log("connected to mongo")
 });
 
