@@ -1,25 +1,63 @@
- <div class="jumbotron">
-  <h1 class="display-3">Mongo News Scraper</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for
-                  calling extra attention to featured content or information.</p>
+ <div class="container">
+ <div class="border border-dark onion jumbotron bg-white">
+  <h1 class="display-3 text-center">Mongo News Scraper</h1>
+  <p class="lead text-center">See What's Going on at The Onion!</p>
   <hr class="my-2">
-  <p>It uses utility classes for typography and
-     spacing to space content out within the larger container.</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#!" role="button">Some action</a>
+    
+      
+     
+      
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            
+               <span>
+      <a class="btn-lg bkgrd text-white  m-1" href="/scrape-art" role="button">Scrape</a>
+      <a class="btn-lg bkgrd text-white " href="./saved.handlebars" role="button">Saved</a>
+    </span>
+            </div>
+        
+          <div class="col-md-4"></div>
+   
+      </div>
+      
+
+      
+    
+  
   </p>
 </div>
+<div class="row">
 
-<div class="card">
+  <span>
+    {{#each article}}
+    <div class="card m-1 border border-dark onion">
   <div class="card-body">
-    <h4 class="card-title bg-primary">News Title--> Links to Article</h4>
-      <h6 class="card-subtitle mb-2">
-        <button type="button" class="btn btn-danger m-1">Delete Article</button>
-        <button type="button" class="btn btn-success m-1">Comment</button>
-        </h6>
-    <p class="card-text">
-     Description
+    <h4 class="card-title text-left">{{this.title}} </h4>
+       
+       
+    <p class="card-text m-1">
+     {{this.body}} <br>
+    </p>
+    <a class="m-1 onion" href={{this.link}}>Go to Article</a>
+     <div class="row">
+       <div class="col-md-10"></div>
+       <div class="col-md-2">
+        <button class ="btn-lg bkgrd text-white" id = "addComment">Add Comment</button>
+      </div>
+      </div>
+      <div class="row" id = "artComment" data-id={{this.id}}>
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id = "comContent"></div>
+        <div class="col-md-2"></div>
+        
+      </div>
+
     </p>
   
   </div>
+  </div>
+  {{/each}}
+  </span>
 </div>

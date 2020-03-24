@@ -37,12 +37,19 @@
     <h4 class="card-title text-left">{{this.title}} </h4>
        
        
-    <p class="card-text">
-     {{this.body}}
+    <p class="card-text m-1">
+     {{this.body}} <br>
+    </p>
+    <a class="m-1 onion" href={{this.link}}>Go to Article</a>
      <div class="row">
        <div class="col-md-10"></div>
        <div class="col-md-2">
-      <button type="button" class="btn bkgrd text-white ">Save Article</button>
+        <form action="/saveMe" method="POST">
+                <input id="article-title" type="hidden" name="title" value={{this.title}}>
+                <input id="article-link" type="hidden" name="link" value={{this.link}}>
+                <input id="article-link" type="hidden" name="link" value={{this.body}}>
+                <button type="submit" class="btn bkgrd text-white ">Save Article</button>
+              </form>
       </div>
       </div>
     </p>

@@ -53,7 +53,7 @@ app.get("/", function(req, res) {
     });
 });
 
-// // A GET route for scraping the echoJS website
+
 app.get("/scrape-art", function(req, res) {
 //   // First, we grab the body of the html with axios
   axios.get("https://www.theonion.com/").then(async function(response) {
@@ -81,6 +81,7 @@ app.get("/scrape-art", function(req, res) {
         
       //       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
+
         .then(function (dbArticle) {
           //           // View the added result in the console
           console.log(dbArticle);
@@ -121,7 +122,7 @@ app.get("/articles/:id", function(req, res) {
 //   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
 //     // ..and populate all of the notes associated with it
-    .populate("comment")
+    .populate("Comment")
     .then(function(dbArticle) {
 //       // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
@@ -151,6 +152,57 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+app.get("/savedarticles", function(req, res) {
+
+  // Grab every doc in the Articles array
+  db.Article.find({}, function(error, found) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      var hbsObj = {
+        articles: found
+      };
+
+      res.render("saved", hbsObj);
+    }
+  });
+});
+
+app.post("/saveMe", function(req, res) {
+
+  var newArtObj = {};
+
+  newArtObj.body = req.body.body;
+
+  newArtObj.title = req.body.title;
+
+  newArtObj.link ='"'+ req.body.link + '"';
+
+  var entry = new db.Article(newArtObj);
+
+  console.log("saved: " + entry);
+
+  // Now, save that entry to the db
+  entry.save(function(err, found) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+    }
+    
+    else {
+      console.log(found);
+    }
+  });
+
+  res.redirect("/savedarticles");
+
+});
+
+
 
 // Start the server
 app.listen(PORT, function() {
