@@ -30,9 +30,7 @@ app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err) =>{
-  if(!err) console.log("connected to mongo")
-});
+mongoose.connect(MONGODB_URI);
 
 
 
@@ -155,53 +153,19 @@ app.post("/articles/:id", function(req, res) {
     res.redirect("/");
 });
 
-app.get("/savedarticles", function(req, res) {
+app.post('/article/comment/:id/delete', function(req, res) {
+  
+  var comId = req.params.id;
 
-  // Grab every doc in the Articles array
-  db.Article.find({}, function(error, found) {
-    // Log any errors
-    if (error) {
-      console.log(error);
-    }
-    // Or send the doc to the browser as a json object
-    else {
-      var hbsObj = {
-        articles: found
-      };
-
-      res.render("saved", hbsObj);
-    }
-  });
-});
-
-app.post("/saveMe", function(req, res) {
-
-  var newArtObj = {};
-
-  newArtObj.body = req.body.body;
-
-  newArtObj.title = req.body.title;
-
-  newArtObj.link ='"'+ req.body.link + '"';
-
-  var entry = new db.Article(newArtObj);
-
-  console.log("saved: " + entry);
-
-  // Now, save that entry to the db
-  entry.save(function(err, found) {
-    // Log any errors
+  db.Comment.findByIdAndRemove(comId, function(err, doc) {
     if (err) {
       console.log(err);
-    }
-    
+    } 
     else {
-      console.log(found);
+      
+      res.redirect('back');
     }
   });
-
-  res.redirect("/savedarticles");
-
 });
 
 

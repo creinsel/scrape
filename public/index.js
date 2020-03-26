@@ -1,0 +1,3 @@
+$("#addComment").on("click", () => {
+    
+})
