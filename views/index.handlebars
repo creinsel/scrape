@@ -53,9 +53,10 @@
         <div class="card">
             <p class="onion">{{this.name}}</p>
             <p class="onion">{{this.body}}<p>
-               <form action="/article/comment/{{this.id}}/delete" method="POST">
+            
+               <form action="/comment/{{this.id}}" method="POST">
             <p>{{article.id}}</p>
-            <input type="submit" class="btn btn-danger" data-id="{{this.id}}" value="Delete">
+            <input type="submit" class="btn btn-danger" data-id="{{comment.id}}" value="Delete">
           </form>
         </div>
         {{/each}}

@@ -25,6 +25,10 @@
             <p class="onion">{{name}}</p>
             <p class="onion">{{body}}<p>
         </div>
+         <form action="/comment/" method="POST">
+            <p>{{article.id}}</p>
+            <input type="submit" class="btn btn-danger" data-id="{{comment.id}}" value="Delete">
+          </form>
         {{/each}}
         {{else}}
         <p>No Comments Yet.</p>
