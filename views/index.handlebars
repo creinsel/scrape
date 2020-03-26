@@ -9,16 +9,11 @@
      
       
         <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+          <div class="col-md-5"></div>
+          
             
-               <span>
-      <a class="btn-lg bkgrd text-white  m-1" href="/scrape-art" role="button">Scrape</a>
-      <a class="btn-lg bkgrd text-white " href="./saved.handlebars" role="button">Saved</a>
-    </span>
-            </div>
-        
-          <div class="col-md-4"></div>
+          <a class="btn-lg bkgrd text-white  m-1" href="/scrape-art" role="button">Scrape</a>
+    
    
       </div>
       
@@ -38,22 +33,17 @@
        
        
     <p class="card-text m-1">
-     {{this.body}} <br>
-    </p>
-    <a class="m-1 onion" href={{this.link}}>Go to Article</a>
-     <div class="row">
-       <div class="col-md-10"></div>
-       <div class="col-md-2">
-        <form action="/saveMe" method="POST">
-                <input id="article-title" type="hidden" name="title" value={{this.title}}>
-                <input id="article-link" type="hidden" name="link" value={{this.link}}>
-                <input id="article-link" type="hidden" name="link" value={{this.body}}>
-                <button type="submit" class="btn bkgrd text-white ">Save Article</button>
-              </form>
+     {{this.body}} 
+    </p><br>
+    <a class="m-1 onion" href={{this.link}}><p class="text center">Go to Article</p></a>
+    <br>
+    
+</div>
       </div>
       </div>
     </p>
   
+  </div>
   </div>
   </div>
   {{/each}}
