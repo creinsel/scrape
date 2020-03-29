@@ -44,6 +44,7 @@ app.get("/", function(req, res) {
       var hbsObj = {
         article : found
       };
+     
       console.log("hbsObj", hbsObj);
       res.render("index", hbsObj);
     })
@@ -120,9 +121,9 @@ app.get("/articles", function(req, res) {
 // // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
 //   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  db.Article.findOne({ _id: req.params.id })
+  db.Article.findById( req.params.id )
 //     // ..and populate all of the notes associated with it
-    .populate({ path: "comment", model: "Comment" })
+    .populate("comments")
     .then(function(dbArticle) {
 //       // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
@@ -141,13 +142,15 @@ app.post("/articles/:id", function(req, res) {
     if (err){
       console.log(err)
     } else{
-      db.Article.findOneAndUpdate({ _id: req.params.id },{$push: { comment: Comment._id }}, { new: true })
+      db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: { comments: req.body._id }}, { new: true })
       .exec(function(err, doc){
         if (err){
           console.log(err)
         } else{
-          res.redirect("/")
+          res.json(doc)
+         
         }
+        
       })
     }
 //       // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note

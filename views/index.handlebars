@@ -17,26 +17,27 @@
 
   <span>
     {{#each article}}
-    <div class="card m-1 border border-dark onion">
+    <div class="card m-1 border border-dark onion" data-id="{{id}}">
   <div class="card-body">
-    <h4 class="card-title text-left">{{this.title}} </h4>
+    <h4 class="card-title text-left">{{title}} </h4>
        
        
     <p class="card-text m-1">
-     {{this.body}} 
+     {{body}} 
     </p><br>
-    <a class="m-1 onion" href={{this.link}}><p class="text center">Go to Article</p></a>
+    <a class="m-1 onion" href={{link}}><p class="text center">Go to Article</p></a>
     <br>
+    
      <div class="row m-1">
-    <div class="col-md-6">
-    <form action="/articles/{{this.id}}" method="POST" class="card-panel">
+   <div class="col-md-6">
+    <form action="/articles/{{id}}" method="POST" class="card-panel">
         <h5>Comment on this Article</h5>
        <div class="form-group">
     <label for="formGroupExampleInput">Note Title</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Title" name="name">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Title" name="name" value= "name">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Comment" name="body">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Comment" name="body" value = "body">
   </div>
   
  <button class="btn bkgrd text-white" type="submit" value="Submit">Add Comment</button>
@@ -47,24 +48,30 @@
     
     <div class="col-md-6">
         <h5>Comments:</h5>
-        {{#if this.comment}}
+        
+        {{#if comment}}
         {{#each comment}}
         
         <div class="card">
-            <p class="onion">{{this.name}}</p>
-            <p class="onion">{{this.body}}<p>
+        <p>{{article.comment.id}}</p>  
+            <p class="onion">{{comment.name}}</p>
+            <p class="onion">{{body}}<p>
             
-               <form action="/comment/{{this.id}}" method="POST">
+               <form action="/comment/{{comment.id}}" method="POST">
             <p>{{article.id}}</p>
             <input type="submit" class="btn btn-danger" data-id="{{comment.id}}" value="Delete">
           </form>
         </div>
+       
         {{/each}}
+        
         {{else}}
         <p>No Comments Yet.</p>
-        
         {{/if}}
-</div>
+    
+        
+</div> 
+
     </div>
 </div>
       </div>
