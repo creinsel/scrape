@@ -143,7 +143,7 @@ app.post("/articles/:id", function(req, res) {
     if (err){
       console.log(err)
     } else{
-      db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: { comments: req.body._id }}, { new: true })
+      db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: { comment: req.body._id }}, { new: true })
       .exec(function(err, doc){
         if (err){
           console.log(err)

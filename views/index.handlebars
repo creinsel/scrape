@@ -54,7 +54,7 @@
         
         <div class="card">
         <p>{{article.comment.id}}</p>  
-            <p class="onion">{{comment.name}}</p>
+            <p class="onion">{{this}}</p>
             <p class="onion">{{body}}<p>
             
                <form action="/comment/{{comment.id}}" method="POST">
@@ -75,13 +75,13 @@
     </div>
 </div>
       </div>
+       {{/each}}
       </div>
-    </p>
+    
+ 
+  </div>
   
-  </div>
-  </div>
-  </div>
-  {{/each}}
+  
   </span>
 </div>
 
