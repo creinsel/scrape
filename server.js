@@ -55,6 +55,7 @@ app.get("/", function(req, res) {
 });
 
 
+
 app.get("/scrape-art", function(req, res) {
 //   // First, we grab the body of the html with axios
   axios.get("https://www.theonion.com/").then(async function(response) {
